@@ -6,8 +6,8 @@ const int buttonPins[numButtons] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 
 int buttonState[numButtons];
 int lastButtonState[numButtons];
 
-const int numPots = 14;
-const int potPins[numPots] = {A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13};
+const int numPots = 13;
+const int potPins[numPots] = {A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12};
 int potValue[numPots];
 int lastPotValue[numPots];
 
@@ -18,7 +18,7 @@ void setup() {
     buttonState[i] = digitalRead(buttonPins[i]);
     lastButtonState[i] = buttonState[i];
   }
-//same for the pots
+//same for the pots array
   for (int i = 0; i < numPots; i++) {
     potValue[i] = analogRead(potPins[i]);
     lastPotValue[i] = potValue[i];
@@ -30,9 +30,9 @@ void loop() {
     buttonState[i] = digitalRead(buttonPins[i]);
     if (buttonState[i] != lastButtonState[i]) {
       if (buttonState[i] == LOW) {
-        noteOn(0, 60 + i, 127);  // Note On
+        noteOn(0, 60 + i, 127);  //Note on! so it can be picked up by rekordbox
       } else {
-        noteOff(0, 60 + i, 0);   // Note Off
+        noteOff(0, 60 + i, 0);   //note off otherwise it can get stuck looping
       }
       lastButtonState[i] = buttonState[i];
     }
